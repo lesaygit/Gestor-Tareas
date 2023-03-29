@@ -1,0 +1,10 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{tarea.titulo}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>{{tarea.description}}</mat-card-content>
+    <mat-card-actions align="end">
+        <button  mat-flat-button color="accent" (click)="deleteTarea(tarea)">eliminar</button>
+        <button  mat-flat-button color="primary" (click)="editTarea(tarea)">editar</button>
+    </mat-card-actions>
+</mat-card>

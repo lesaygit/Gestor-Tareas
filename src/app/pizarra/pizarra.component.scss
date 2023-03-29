@@ -1,0 +1,51 @@
+@import '../../share/variables';
+
+:host {
+    flex-grow: 1;
+    overflow: hidden;
+   }
+
+.container {
+    display: flex;
+    justify-content:space-between;
+    height: 100%;
+   
+    .tarea_container {
+        flex-grow: 1;
+        padding: 10px;
+        overflow: auto;
+        max-width: 455px;
+
+        h1 {
+            padding: 2px;
+            border-radius: 5px;
+        }
+
+        app-tarea {
+            display: block;
+            margin: 5px auto;
+        }
+
+        &.nuevas {
+           
+            h1 {
+                background-color: darken($nuevasbackg, 20%);
+            }
+        }
+
+        &.proceso {
+           
+            h1 {
+                background-color: darken($procesobackg, 20%);
+            }
+        }
+
+        &.terminadas {
+          
+            h1 {
+                background-color: darken($terminadasbackg, 20%)
+            }
+        }
+
+    }
+}

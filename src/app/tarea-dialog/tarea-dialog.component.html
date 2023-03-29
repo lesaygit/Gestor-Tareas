@@ -1,0 +1,53 @@
+<h1 mat-dialog-title *ngIf="tareaEdit else datanull">Editar Tarea</h1>
+<ng-template #datanull>
+  <h1 mat-dialog-title>Crear Tarea</h1>
+</ng-template>
+<div class="container">
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="formTarea" class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Titulo Tarea</mat-label>
+        <input matInput formControlName="titulo">
+        <div *ngIf="formTarea.invalid">
+          <div class="error" *ngIf="formTarea.get('titulo')?.touched && formTarea.get('titulo')?.errors?.['required']">
+            Este campo es requerido.
+          </div>
+          <div class="error" *ngIf="formTarea.get('titulo')?.touched && formTarea.get('titulo')?.errors?.['maxlength']">
+            30 caracteres máximo.
+          </div>
+          <div class="error" *ngIf="formTarea.get('titulo')?.touched && formTarea.get('titulo')?.errors?.['pattern']">
+            Caracteres no validos.
+          </div>
+        </div>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <div *ngIf="formTarea.invalid">
+          <div class="error"
+            *ngIf="formTarea.get('description')?.touched && formTarea.get('description')?.errors?.['maxlength']">
+            250 caracteres máximo.
+          </div>
+        </div>
+      </mat-form-field>
+      <small> {{this.formTarea.get('description')?.value.length}}/250</small>
+      
+      <mat-form-field *ngIf="tareaEdit" appearance="fill">
+        <mat-label>Tarea Estado</mat-label>
+        <mat-select formControlName="status">
+          <mat-option></mat-option>
+          <mat-option [value]="option" *ngFor="let option of estadoTareas">{{ option }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close color="accent">Cancel</button>
+    <button *ngIf="tareaEdit===null else datatarea" mat-flat-button color="primary" [disabled]="formTarea.invalid"
+      (click)="crearTarea()">Crear</button>
+    <ng-template #datatarea>
+      <button mat-flat-button color="primary" [disabled]="formTarea.invalid" (click)="editarTarea()">Edit</button>
+    </ng-template>
+  </mat-dialog-actions>
+</div>
